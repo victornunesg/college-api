@@ -11,6 +11,11 @@ student_model = api.model("Student", {
     # "course": fields.Nested(course_model)  # can't put both together in order to avoid a loop of circular reference
 })
 
+student_input_model = api.model("StudentInput", {
+    "name": fields.String,
+    "course_id": fields.Integer,
+})
+
 course_model = api.model("Course", {
     "id": fields.Integer,
     "name": fields.String,
@@ -21,7 +26,4 @@ course_input_model = api.model("CourseInput", {
     "name": fields.String,
 })
 
-student_input_model = api.model("StudentInput", {
-    "name": fields.String,
-    "course_id": fields.Integer,
-})
+

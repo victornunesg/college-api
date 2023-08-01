@@ -2,7 +2,7 @@
 
 from flask_restx import Resource, Namespace  # namespace is going to act like a Blueprint in Flask
 # importing this function to enable token in the endpoints
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, current_user
 from werkzeug.security import generate_password_hash, check_password_hash  # to register and login users
 from models import Course, Student, User
 from app import db
@@ -44,8 +44,11 @@ class CourseListAPI(Resource):
     @ns.marshal_list_with(course_model)  # course_model defined in api_models.py, like a mold to return a response
     def get(self):
         print(get_jwt_identity())  # getting the ID from token (user logged in)
-        return Course.query.all()  # list of tuples that is converted into a JSON by marshal_list_with decorator
+        print(current_user)  # getting the user as an object
+        return Course.query.filter_by(instructor=current_user).all()  # getting only the courses related to the user
+        # this is a list of tuples that is converted into a JSON by marshal_list_with decorator
 
+    @ns.doc(security="jsonWebToken")
     @ns.expect(course_input_model)  # expected type of data
     @ns.marshal_with(course_model)  # response structure, using marshal_with since will return only one object
     def post(self):
@@ -138,6 +141,6 @@ class Login(Resource):
             return {"error": "User does not exist"}, 401
         if not check_password_hash(user.password_hash, ns.payload["password"]):
             return {"error": "Incorrect password"}, 401
-        return {"access_token": create_access_token(user.username)}
+        return {"access_token": create_access_token(user)}
 
 

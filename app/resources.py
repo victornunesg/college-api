@@ -1,13 +1,14 @@
 # in this file we will define the API endpoints
 
 from flask_restx import Resource, Namespace  # namespace is going to act like a Blueprint in Flask
-from flask_jwt_extended import jwt_required  # importing this function to enable token in the endpoints
-from flask_jwt_extended import get_jwt_identity
-from models import Course, Student
+# importing this function to enable token in the endpoints
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from werkzeug.security import generate_password_hash, check_password_hash  # to register and login users
+from models import Course, Student, User
 from app import db
 
 # brings a JSON response structured to be used in the endpoints
-from api_models import course_model, student_model, course_input_model, student_input_model
+from api_models import course_model, student_model, course_input_model, student_input_model, login_model, user_model
 
 # this dictionary is used to define the structure and to describe the nature of the credentials that can be passed to a
 # particular endpoint, in order to pass the authorization using the swagger
@@ -114,3 +115,29 @@ class StudentAPI(Resource):
         db.session.delete(student)
         db.session.commit()
         return {}, 204
+
+
+@ns.route("/register")
+class Register(Resource):
+    @ns.expect(login_model)
+    @ns.marshal_with(user_model)
+    def post(self):
+        # creating a new user
+        user = User(username=ns.payload["username"], password_hash=generate_password_hash(ns.payload["password"]))
+        db.session.add(user)
+        db.session.commit()
+        return user, 201
+
+@ns.route("/login")
+class Login(Resource):
+
+    @ns.expect(login_model)
+    def post(self):
+        user = User.query.filter_by(username=ns.payload["username"]).first()
+        if not user:
+            return {"error": "User does not exist"}, 401
+        if not check_password_hash(user.password_hash, ns.payload["password"]):
+            return {"error": "Incorrect password"}, 401
+        return {"access_token": create_access_token(user.username)}
+
+

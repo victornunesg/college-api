@@ -1,5 +1,10 @@
 from app import app, db
 from models import Course, Student
+from flask_jwt_extended import create_access_token
+
+with app.app_context():
+    token = create_access_token("Victor")
+    print(token)
 
 # this file is used to do test with the database
 
@@ -7,7 +12,7 @@ from models import Course, Student
 # =====================================
 # creates database according to the models, comment after run it for the first time
 # =====================================
-
+#
 # with app.app_context():
 #     db.create_all()
 

@@ -3,7 +3,7 @@ from extensions import api
 
 # in this file we are creating models to structure a JSON response according to api's needs
 
-# model to structure the list of courses into a JSON object
+# model to structure the list of students into a JSON object
 # first argument is the model Name, second is the JSON structure
 student_model = api.model("Student", {
     "id": fields.Integer,

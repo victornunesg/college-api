@@ -31,6 +31,15 @@ class Hello(Resource):  # inside the class you can define methods for each HTTP 
         return {"hello": "restx"}
 
 
+@ns.route("/users")
+class UserList(Resource):
+    method_decorators = [jwt_required()]
+
+    @ns.doc(security="jsonWebToken")
+    @ns.marshal_list_with(user_model)
+    def get(self):
+        return User.query.all()
+
 @ns.route("/courses")
 class CourseListAPI(Resource):
     # since it is not possible to put jwt as a decorator, we use method_decorators attribute from Resource class
@@ -45,7 +54,8 @@ class CourseListAPI(Resource):
     def get(self):
         print(get_jwt_identity())  # getting the ID from token (user logged in)
         print(current_user)  # getting the user as an object
-        return Course.query.filter_by(instructor=current_user).all()  # getting only the courses related to the user
+        return Course.query.all()
+        # return Course.query.filter_by(instructor=current_user).all()  # getting only the courses related to the user
         # this is a list of tuples that is converted into a JSON by marshal_list_with decorator
 
     @ns.doc(security="jsonWebToken")

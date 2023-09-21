@@ -152,5 +152,3 @@ class Login(Resource):
         if not check_password_hash(user.password_hash, ns.payload["password"]):
             return {"error": "Incorrect password"}, 401
         return {"access_token": create_access_token(user)}
-
-

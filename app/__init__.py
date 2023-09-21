@@ -4,10 +4,10 @@ from resources import ns
 from models import User
 
 ''' Library installation:
-pip install flask
-pip install flask-restx
-pip install flask-sqlalchemy
-'''
+        pip install flask
+        pip install flask-restx
+        pip install flask-sqlalchemy
+        pip install flask-jwt-extended '''
 
 app = Flask(__name__)  # instantiate Flask
 

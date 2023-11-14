@@ -43,20 +43,20 @@ from models import Course, Student, User
 # checking data inside the tables
 # =====================================
 
-# with app.app_context():
-#     courses = Course.query.all()  # getting all information from the table
-#     students = Student.query.all()
-#     users = User.query.all(
-#
-#     )
-#     print(f'\nList of courses with query.all(): {courses}')
-#     for course in courses:
-#         print(course.name)
-#
-#     print(f'\nList of students with query.all(): {students}')
-#     for student in students:
-#         print(student.name)
-#
-#     print(f'\nList of users with query.all(): {users}')
-#     for user in users:
-#         print(str(user.id) + ' | ' + user.username + ' | ' + user.password_hash)
+with app.app_context():
+    courses = Course.query.all()  # getting all information from the table
+    students = Student.query.all()
+    users = User.query.all(
+
+    )
+    print(f'\nList of courses with query.all(): {courses}')
+    for course in courses:
+        print(course.name)
+
+    print(f'\nList of students with query.all(): {students}')
+    for student in students:
+        print(student.name)
+
+    print(f'\nList of users with query.all(): {users}')
+    for user in users:
+        print(str(user.id) + ' | ' + user.username + ' | ' + user.password_hash)

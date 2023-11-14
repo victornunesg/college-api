@@ -1,0 +1,16 @@
+-> Notes:
+
+REST API usando Flask-Rest-x é uma biblioteca em Flask para criação de API's que ainda está sendo atualizada.
+Outras bibliotecas costumam parar de ser atualizadas.
+
+A API irá funcionar através de uma swagger page, onde poderemos realizar algumas operações (GET, POST, UPDATE, DELETE).
+
+Models serão criados com a funcionalidade de armazenar os dados no banco de dados
+Routes irão coletar ou inserir/deletar dados do banco de dados
+
+-> Libraries used:
+
+pip install flask
+pip install flask-restx
+pip install flask-sqlalchemy
+pip install python-dotenv ( para ligar o modo debug no arquivo .flaskenv)

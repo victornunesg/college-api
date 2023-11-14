@@ -1,32 +1,18 @@
-from flask import Flask
-from extensions import db, api, jwt
-from resources import ns
-from models import User
+from flask import Flask  # importando a classe Flask
+from .extensions import api, db  # importando os objetos criados em extensions
+from .routes import ns  # importando o namespace que registra as rotas da API
 
-''' Library installation:
-        pip install flask
-        pip install flask-restx
-        pip install flask-sqlalchemy
-        pip install flask-jwt-extended '''
+def create_app():
+    app = Flask(__name__)  # criando objeto Flask
 
-app = Flask(__name__)  # instantiate Flask
+    # passando configurações para o app
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"  # banco de dados será criado em uma pasta 'instance' na raiz do projeto
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///db.sqlite3"  # configuring database source of sqlalchemy
-app.config["JWT_SECRET_KEY"] = "thisisasecret"
+    # iniciando api e db dentro do app
+    api.init_app(app)
+    db.init_app(app)
 
-api.init_app(app)  # initianting api inside the app
-db.init_app(app)  # initianting db inside the app
-jwt.init_app(app)  # initiating jwt inside app (token module)
+    # registrando o namespace na api
+    api.add_namespace(ns)
 
-api.add_namespace(ns)  # registering the namespace defined in resources.py
-
-
-@jwt.user_identity_loader
-def user_identity_lookup(user):
-    return user.id  # returns something unique about the user
-
-
-@jwt.user_lookup_loader
-def user_lookup_callback(_jwt_header, jwt_data):  # the first argument has a '_' before because it will not be used
-    identity = jwt_data["sub"]  # identity is who the user is
-    return User.query.filter_by(id=identity).first()
+    return app  # retorna o objeto criado

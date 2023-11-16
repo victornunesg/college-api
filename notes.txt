@@ -8,6 +8,10 @@ A API irá funcionar através de uma swagger page, onde poderemos realizar algum
 Models serão criados com a funcionalidade de armazenar os dados no banco de dados
 Routes irão coletar ou inserir/deletar dados do banco de dados
 
+Ao tentar retornar uma consulta SQL do banco, irá resultar em um erro de 'tipo de objeto não é um JSON serializável'
+Para solucionar, temos que converter os resultados da query em algo que possamos passar como um JSON (dicionário por exemplo)
+Para ajudar o RestX a fazer isso, temos que criar um 'modelo' para converter antes de enviar como resposta da API (arquivo api_models.py)
+
 -> Libraries used:
 
 pip install flask

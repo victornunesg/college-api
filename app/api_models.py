@@ -2,9 +2,7 @@
 from flask_restx import fields
 from extensions import api
 
-
 # queremos criar modelos que representarão qual será a estrutura de resposta dos apontamentos
-
 
 student_model = api.model("Student", {
     "id": fields.Integer,

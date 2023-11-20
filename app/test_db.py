@@ -1,4 +1,4 @@
-from app.models import *
+from models import *
 from app import app
 
 # this file is used to do test with the database

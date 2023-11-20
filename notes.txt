@@ -19,4 +19,12 @@ Para ajudar o RestX a fazer isso, temos que criar um 'modelo' para converter ant
 pip install flask
 pip install flask-restx
 pip install flask-sqlalchemy
-pip install python-dotenv ( para ligar o modo debug no arquivo .flaskenv)
+pip install python-dotenv (para ligar o modo debug no arquivo .flaskenv)
+pip install flask-jwt-extended (para implementação da autenticação via JSON web token)
+
+-> Usuários:
+
+Anthony / password 1
+Zoe / password 1
+
+Para logar, digitar 'Bearer' e depois dar um espaço antes de colar o token

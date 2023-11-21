@@ -1,8 +1,8 @@
-# College API
+# Rest API - Flask RESTX
 
 ---
 
-In this project an API was developed using Flask RestX library (a web application framework written in Python). The objective was: elaborate from scratch a RESTful API to be used at any educational institution.
+In this project a Rest  API was developed using Flask RestX library (a web application framework written in Python). The objective was: elaborate from scratch a RESTful API to be used at any educational institution.
 
 You can do requests do get data related to the registered courses, students and also users allowed to perform the requests that demand authorization token.
 
@@ -42,7 +42,8 @@ college-api/
 │   ├── extensions.py
 │   ├── main.py
 │   ├── models.py
-│   ├── resources.py
+│   ├── queries_db.py
+│   ├── routes.py
 ├── images
 │   ├── ...
 ├── instance
@@ -54,6 +55,8 @@ college-api/
 
 ---
 ![home.png](images%2Fhome.png)
+
+![home2.png](images%2Fhome2.png)
 
 ![login1.png](images%2Flogin1.png)
 

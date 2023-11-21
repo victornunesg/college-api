@@ -1,4 +1,5 @@
 -> Anotações:
+=================
 
 REST API usando Flask-Rest-x é uma biblioteca em Flask para criação de API's que ainda está sendo atualizada.
 Outras bibliotecas costumam parar de ser atualizadas.
@@ -8,13 +9,17 @@ A API irá funcionar através de uma swagger page, onde poderemos realizar algum
 Models serão criados com a funcionalidade de armazenar os dados no banco de dados
 Routes irão coletar ou inserir/deletar dados do banco de dados
 
+namespaces agem como uma blueprint; dentro da namespace você registra os endpoints de sua API
+você pode ter quantas namespaces desejar e inserir endpoints para cada uma delas
+
+
 Ao tentar retornar uma consulta SQL do banco, irá resultar em erro de 'tipo de objeto não é um JSON serializável'
 Para solucionar, temos que converter os resultados da query em algo que possamos passar como um JSON (dicionário por exemplo)
 Para ajudar o RestX a fazer isso, temos que criar um 'modelo' para converter antes de enviar como resposta da API (arquivo api_models.py)
 
 
-
 -> Bibliotecas utilizadas:
+=================
 
 pip install flask
 pip install flask-restx
@@ -23,8 +28,9 @@ pip install python-dotenv (para ligar o modo debug no arquivo .flaskenv)
 pip install flask-jwt-extended (para implementação da autenticação via JSON web token)
 
 -> Usuários:
+=================
 
-Anthony / password 1
-Zoe / password 1
+"username": "Victor",
+"password": "Password123"
 
 Para logar, digitar 'Bearer' e depois dar um espaço antes de colar o token

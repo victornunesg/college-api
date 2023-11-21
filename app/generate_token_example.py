@@ -1,7 +1,0 @@
-from flask_jwt_extended import create_access_token
-from app import app
-
-with app.app_context():
-    print(create_access_token("Victor"))
-
-Token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwMDUwNTM0NSwianRpIjoiYTJmYjdjY2UtZThlYS00OGVhLWExMTMtMDU1MTg4NDBlOGJjIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IlZpY3RvciIsIm5iZiI6MTcwMDUwNTM0NSwiZXhwIjoxNzAwNTA2MjQ1fQ.vZvQVfAEp9UvzdKDgBQfRzsPBwCTnYX2JdFvCjQBnJc"
